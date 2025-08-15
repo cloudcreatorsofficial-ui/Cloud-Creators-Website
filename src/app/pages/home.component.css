@@ -344,7 +344,7 @@ body {
 /* Portfolio Section Styling */
 .portfolio-section {
   background-color: white; /* peach background */
-  padding: 40px 20px;
+  padding: 40px 80px; /* Increased horizontal padding to make space for buttons */
   position: relative; /* Ensure arrows are positioned relative to this section */
 }
 
@@ -374,13 +374,15 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  overflow: hidden; /* Hide animation overflow */
 }
 
 .image-slider img {
   max-width: 500px;
   height: auto;
   display: block;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+  border-radius: 8px; /* Add subtle border radius for better look */
 }
 
 .image-slider {
@@ -453,47 +455,7 @@ body {
   height: 40px;
 }
 .portfolio-main-btn {
-  background: none;
-  border: none;
-  font-size: 3rem;
-  color: #333;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  z-index: 10;
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
-}
-
-/* Position for the left arrow */
-.left-btn {
-  left: -80px;
-}
-
-/* Position for the right arrow */
-.right-btn {
-  right: 20px;
-}
-
-
-.portfolio-main-btn:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.prev-project {
-  left: 10px; /* Adjusted for better spacing */
-}
-
-.next-project {
-  right: 10px; /* Adjusted for better spacing */
+  display: none; /* Hide all portfolio navigation buttons */
 }
 
 .project-slide {

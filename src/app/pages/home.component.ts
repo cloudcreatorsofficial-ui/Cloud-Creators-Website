@@ -41,37 +41,45 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   }
 
   createCharts() {
-    // Pie Chart
-    new Chart('myPieChart', {
-      type: 'pie',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow'],
-        datasets: [{
-          label: 'My Dataset',
-          data: [10, 20, 30],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-        }]
-      }
-    });
+    // Only create charts if the elements exist
+    const pieChartElement = document.getElementById('myPieChart');
+    const barChartElement = document.getElementById('myBarChart');
 
-    // Bar Chart
-    new Chart('myBarChart', {
-      type: 'bar',
-      data: {
-        labels: ['January', 'February', 'March'],
-        datasets: [{
-          label: 'Monthly Sales',
-          data: [65, 59, 80],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: 'top' },
+    if (pieChartElement) {
+      // Pie Chart
+      new Chart('myPieChart', {
+        type: 'pie',
+        data: {
+          labels: ['Red', 'Blue', 'Yellow'],
+          datasets: [{
+            label: 'My Dataset',
+            data: [10, 20, 30],
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+          }]
         }
-      }
-    });
+      });
+    }
+
+    if (barChartElement) {
+      // Bar Chart
+      new Chart('myBarChart', {
+        type: 'bar',
+        data: {
+          labels: ['January', 'February', 'March'],
+          datasets: [{
+            label: 'Monthly Sales',
+            data: [65, 59, 80],
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'top' },
+          }
+        }
+      });
+    }
   }
 
   @HostListener('window:scroll', [])
@@ -176,50 +184,76 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private startAutoScroll() {
     if (!this.isBrowser) return;
 
-    const images = ['assets/website 1.png', 'assets/website 2.png', 'assets/website 3.png', 'assets/website 4.png'];
-    let currentIndex = 0;
-    const sliderImage = document.getElementById('slider-image') as HTMLImageElement;
-    
-    if (!sliderImage) return;
+    // Wait a bit for DOM to be fully loaded
+    setTimeout(() => {
+      const images = [
+        'assets/website%201.png', 
+        'assets/website%202.png', 
+        'assets/website%203.png', 
+        'assets/website%204.png'
+      ];
+      let currentIndex = 0;
+      const sliderImage = document.getElementById('slider-image') as HTMLImageElement;
+      
+      console.log('Slider image element:', sliderImage); // Debug log
+      
+      if (!sliderImage) {
+        console.error('Slider image element not found!');
+        return;
+      }
 
-    // Set initial image
-    sliderImage.src = images[currentIndex];
-
-    // Start auto-rotation every 1 second
-    this.autoScrollInterval = setInterval(() => {
-      currentIndex = (currentIndex + 1) % images.length;
+      // Set initial image
       sliderImage.src = images[currentIndex];
-      
-      // Add fade transition effect
-      sliderImage.style.transition = 'opacity 0.5s ease-in-out';
-      sliderImage.style.opacity = '0';
-      
-      setTimeout(() => {
-        sliderImage.style.opacity = '1';
-      }, 250);
-    }, 3500);
+      console.log('Initial image set to:', images[currentIndex]); // Debug log
 
-    // Pause on hover
-    const sliderContainer = document.querySelector('.image-slider');
-    if (sliderContainer) {
-      sliderContainer.addEventListener('mouseenter', () => {
-        clearInterval(this.autoScrollInterval);
-      });
-      
-      sliderContainer.addEventListener('mouseleave', () => {
-        this.autoScrollInterval = setInterval(() => {
-          currentIndex = (currentIndex + 1) % images.length;
+      // Add CSS transition for fade animation
+      sliderImage.style.transition = 'opacity 0.6s ease-in-out, transform 0.6s ease-in-out';
+
+      // Start auto-rotation every 2 seconds
+      this.autoScrollInterval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % images.length;
+        console.log('Changing to image:', images[currentIndex]); // Debug log
+        
+        // Add smooth fade + scale animation
+        sliderImage.style.opacity = '0';
+        sliderImage.style.transform = 'scale(1.05)';
+        
+        setTimeout(() => {
           sliderImage.src = images[currentIndex];
-          
-          sliderImage.style.transition = 'opacity 0.5s ease-in-out';
-          sliderImage.style.opacity = '0';
-          
-          setTimeout(() => {
-            sliderImage.style.opacity = '1';
-          }, 250);
-        }, 3500);
-      });
-    }
+          sliderImage.style.opacity = '1';
+          sliderImage.style.transform = 'scale(1)';
+        }, 300);
+      }, 2000); // Changed to 2 seconds (2000ms)
+
+      console.log('Auto scroll started with 2 second intervals'); // Debug log
+
+      // Pause on hover
+      const sliderContainer = document.querySelector('.image-slider');
+      if (sliderContainer) {
+        sliderContainer.addEventListener('mouseenter', () => {
+          console.log('Pausing slideshow'); // Debug log
+          clearInterval(this.autoScrollInterval);
+        });
+        
+        sliderContainer.addEventListener('mouseleave', () => {
+          console.log('Resuming slideshow'); // Debug log
+          this.autoScrollInterval = setInterval(() => {
+            currentIndex = (currentIndex + 1) % images.length;
+            console.log('Changing to image (resumed):', images[currentIndex]); // Debug log
+            
+            // Add fade + scale animation for resumed slideshow
+            sliderImage.style.opacity = '0';
+            sliderImage.style.transform = 'scale(1.05)';
+            
+            setTimeout(() => {
+              sliderImage.src = images[currentIndex];
+              sliderImage.style.opacity = '1';
+              sliderImage.style.transform = 'scale(1)';
+            }, 300);
+          }, 2000); // Changed to 2 seconds (2000ms)
+        });
+      }
+    }, 1000); // Wait time for DOM to be ready
   }
 
   ngOnDestroy() {
