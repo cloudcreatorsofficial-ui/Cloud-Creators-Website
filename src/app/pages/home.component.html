@@ -1,0 +1,218 @@
+<app-navbar></app-navbar>
+
+<main id="home" class="hero-section">
+  <div class="cloud-container">
+    <img src="assets/cloud-graphic.png" alt="Cloud Graphic" class="cloud-bg" />
+    <div class="hero-text">
+      <h1>Cloud Creators</h1>
+      <p>Building Your Digital Future</p>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <div id="services" class="services">
+    <h2 class="services-title">Services</h2>
+    <div class="services-list">
+      <div class="service-card" style="background:#d8f3dc;">
+        <img src="assets/website-icon.png" alt="Web Development">
+        <h3>Web Development</h3>
+        <p>Beautiful, fast, and responsive websites.</p>
+      </div>
+      <div class="service-card" style="background:#e0e7ff;">
+        <img src="assets/app-icon.png" alt="App Development">
+        <h3>App Development</h3>
+        <p>Engaging apps for Android &amp; iOS.</p>
+      </div>
+      <div class="service-card" style="background:#f0f4f8;">
+        <img src="assets/ai-icon.png" alt="AI/ML Models">
+        <h3>AI/ML Models</h3>
+        <p>Smart solutions powered by AI.</p>
+      </div>
+      <div class="service-card" style="background:#cffafe;">
+        <img src="assets/resume-icon.png" alt="Resumes/Portfolios">
+        <h3>Resumes/Portfolios</h3>
+        <p>Designs that get you noticed.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Us Section -->
+  <section id="about" class="about-section">
+    <div class="about-container">
+      <div class="about-image">
+        <img src="assets/team-collaboration.png" alt="Team Collaboration" />
+      </div>
+      <div class="about-content">
+        <h2>About Us</h2>
+        <p><strong>Cloud Creators</strong> are passionate digital architects transforming ideas into cutting-edge realities.</p>
+        <p>Our expert team delivers tailor-made solutions that elevate businesses globally with <strong>quality, transparency, and innovation</strong>.</p>
+        <p><em>Serving clients worldwide, we bring <span class="highlight">world-class expertise</span> wherever you are.</em></p>
+        <ul class="values-list">
+          <li><img src="assets/innovation.png" alt="Innovation Icon" /> Innovation</li>
+          <li><img src="assets/quality.png" alt="Quality Icon" /> Quality Craftsmanship</li>
+          <li><img src="assets/global.png" alt="Global Icon" /> International Presence</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="portfolio-section">
+    <div class="portfolio-header-section">
+    <h2 class="portfolio-title">Portfolio</h2>
+    <p class="portfolio-subtitle">
+      Showcasing our finest projects, crafted with <strong>creativity</strong>, 
+      <strong>precision</strong>, and <strong>innovation</strong>.
+    </p>
+  </div>
+    <div class="portfolio-card">
+      <div class="portfolio-header">
+        <img src="assets/portfolio-image.png" alt="Portfolio Project" class="portfolio-image">
+        <div class="portfolio-info">
+          <h2>Enhancement of OHRC images</h2>
+          <p class="subtitle">Retail Innovations Inc.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-content">
+        <div class="portfolio-columns">
+          <div class="column">
+            <h3>The Challenge</h3>
+            <p>Brief description of the client's challenge...</p>
+          </div>
+          <div class="column">
+            <h3>Our Solution</h3>
+            <p>Brief description of the solution you implemented...</p>
+          </div>
+          <div class="column">
+            <h3>Results</h3>
+            <p><strong>+152%</strong> engagement increase</p>
+          </div>
+        </div>
+
+      
+
+        <!-- Tools & Technologies -->
+        <div class="tools-section">
+          <h3>Tools and Technologies</h3>
+          <div class="tools-icons">
+            <img src="assets/icon1.png" alt="Tool 1">
+            <img src="assets/icon2.png" alt="Tool 2">
+            <img src="assets/icon3.png" alt="Tool 3">
+            <img src="assets/icon4.png" alt="Tool 4">
+            <img src="assets/icon5.png" alt="Tool 5">
+          </div>
+        </div>
+
+        <div class="portfolio-footer">
+          <button class="btn-primary">Explore More Projects</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Terms & Conditions -->
+  <section id="terms" class="section reveal">
+    <h2>Terms & Conditions</h2>
+    <p>This is the Terms & Conditions section placeholder content.</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <h2 class="contact-title" style="text-align: center;">Contact Us</h2>
+    <div class="contact-container contact-flex">
+      <!-- Left Image -->
+      <div class="contact-image">
+        <img src="assets/contact-image.png" alt="Contact Left Image" />
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-card">
+        <p class="contact-subtitle">Quality service, every step of the way.</p>
+        <form class="contact-form">
+          <!-- Row 1: Name & Email -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name" class="form-label"><strong>Name</strong></label>
+              <input type="text" id="name" placeholder="Enter your name" name="name" class="form-field" required />
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label"><strong>Email</strong></label>
+              <input type="email" id="email" placeholder="Enter your email" name="email" class="form-field" required />
+            </div>
+          </div>
+
+          <!-- Row 2: Requirement & Description -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="requirement" class="form-label"><strong>Select your requirement</strong></label>
+              <select id="requirement" name="requirement" class="form-field" required>
+                <option value="" selected>Select one</option>
+                <option value="website">Website</option>
+                <option value="ai-ml-model">AI/ML Model</option>
+                <option value="app">App</option>
+                <option value="resume">Resume</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="requirementDescription" class="form-label"><strong>Description</strong></label>
+              <textarea id="requirementDescription" placeholder="Describe your requirement..." name="requirementDescription" class="form-field" required></textarea>
+            </div>
+          </div>
+
+          <!-- Row 3: Schedule a Meeting -->
+          <div class="form-row date-row">
+            <div class="form-group date-picker-wrapper" style="position: relative; flex: 1;">
+              <label for="schedule" class="form-label"><strong>Schedule a meeting</strong></label>
+              <input type="date" id="schedule" name="schedule" class="form-field date-picker" required />
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="submit-row">
+            <button type="submit" class="btn-submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Chart.js Initialization -->
+<script>
+new Chart(document.getElementById('resultsPie'), {
+    type: 'pie',
+    data: {
+        labels: ['Growth', 'Engagement', 'Conversion'],
+        datasets: [{
+            data: [50, 30, 20],
+            backgroundColor: ['#7a4df0', '#f39c12', '#2ecc71']
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } }
+    }
+});
+
+new Chart(document.getElementById('performanceBar'), {
+    type: 'bar',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        datasets: [{
+            label: 'Performance',
+            data: [12, 19, 8, 25, 15],
+            backgroundColor: '#7a4df0',
+            borderRadius: 5
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } }
+    }
+});
+</script>

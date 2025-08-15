@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './navbar/navbar.component'; // ✅ Import NavbarComponent
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    NavbarComponent // ✅ Add it here
+  ],
+  template: `
+    <app-navbar></app-navbar> <!-- Navbar always visible -->
+    <router-outlet></router-outlet>
+  `,
 })
-export class AppComponent {
-  title = 'cloud-creators';
-}
+export class AppComponent {}
