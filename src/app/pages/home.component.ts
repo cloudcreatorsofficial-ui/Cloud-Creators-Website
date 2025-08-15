@@ -1,4 +1,4 @@
-import { Component, HostListener, AfterViewInit, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, HostListener, AfterViewInit, PLATFORM_ID, Inject, OnDestroy } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Chart } from 'chart.js/auto';
@@ -10,7 +10,7 @@ import { Chart } from 'chart.js/auto';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent implements AfterViewInit, OnDestroy {
   sectionIds = ['home', 'services', 'about', 'portfolio', 'terms', 'contact'];
   private isBrowser: boolean;
 
@@ -34,6 +34,9 @@ export class HomeComponent implements AfterViewInit {
           (dateInput as any).showPicker();
         });
       }
+
+      // Start auto-scrolling portfolio images
+      this.startAutoScroll();
     }
   }
 
@@ -113,6 +116,115 @@ export class HomeComponent implements AfterViewInit {
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  // Portfolio navigation functions
+  prevProject() {
+    console.log('Previous project clicked');
+    // Add logic to navigate to previous project
+    this.navigateProject(-1);
+  }
+
+  nextProject() {
+    console.log('Next project clicked');
+    // Add logic to navigate to next project
+    this.navigateProject(1);
+  }
+
+  private navigateProject(direction: number) {
+    // This is a placeholder for project navigation logic
+    // You can implement actual project switching here
+    const projects = document.querySelectorAll('.portfolio-content');
+    if (projects.length > 0) {
+      // Example implementation - you may need to adjust based on your actual project structure
+      console.log(`Navigating ${direction > 0 ? 'next' : 'previous'} project`);
+    }
+  }
+
+  // Image slider functions for portfolio
+  prevImage() {
+    console.log('Previous image clicked');
+    this.navigateImage(-1);
+  }
+
+  nextImage() {
+    console.log('Next image clicked');
+    this.navigateImage(1);
+  }
+
+  private navigateImage(direction: number) {
+    const sliderImage = document.getElementById('slider-image') as HTMLImageElement;
+    if (sliderImage) {
+      // Example image rotation - adjust based on your actual images
+      const images = ['assets/website 1.png', 'assets/website 2.png', 'assets/website 3.png', 'assets/website 4.png'];
+      const currentSrc = sliderImage.src;
+      const currentIndex = images.findIndex(img => currentSrc.includes(img));
+      
+      if (currentIndex !== -1) {
+        let newIndex = currentIndex + direction;
+        if (newIndex < 0) newIndex = images.length - 1;
+        if (newIndex >= images.length) newIndex = 0;
+        
+        sliderImage.src = images[newIndex];
+      }
+    }
+  }
+
+  private autoScrollInterval: any;
+
+  private startAutoScroll() {
+    if (!this.isBrowser) return;
+
+    const images = ['assets/website 1.png', 'assets/website 2.png', 'assets/website 3.png', 'assets/website 4.png'];
+    let currentIndex = 0;
+    const sliderImage = document.getElementById('slider-image') as HTMLImageElement;
+    
+    if (!sliderImage) return;
+
+    // Set initial image
+    sliderImage.src = images[currentIndex];
+
+    // Start auto-rotation every 1 second
+    this.autoScrollInterval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      sliderImage.src = images[currentIndex];
+      
+      // Add fade transition effect
+      sliderImage.style.transition = 'opacity 0.5s ease-in-out';
+      sliderImage.style.opacity = '0';
+      
+      setTimeout(() => {
+        sliderImage.style.opacity = '1';
+      }, 250);
+    }, 3500);
+
+    // Pause on hover
+    const sliderContainer = document.querySelector('.image-slider');
+    if (sliderContainer) {
+      sliderContainer.addEventListener('mouseenter', () => {
+        clearInterval(this.autoScrollInterval);
+      });
+      
+      sliderContainer.addEventListener('mouseleave', () => {
+        this.autoScrollInterval = setInterval(() => {
+          currentIndex = (currentIndex + 1) % images.length;
+          sliderImage.src = images[currentIndex];
+          
+          sliderImage.style.transition = 'opacity 0.5s ease-in-out';
+          sliderImage.style.opacity = '0';
+          
+          setTimeout(() => {
+            sliderImage.style.opacity = '1';
+          }, 250);
+        }, 3500);
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.autoScrollInterval) {
+      clearInterval(this.autoScrollInterval);
     }
   }
 }

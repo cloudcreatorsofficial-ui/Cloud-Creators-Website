@@ -89,60 +89,55 @@
     </div>
   </section>
 
-  <!-- Portfolio Section -->
-  <section id="portfolio" class="portfolio-section">
-    <div class="portfolio-header-section">
-    <h2 class="portfolio-title">Portfolio</h2>
-    <p class="portfolio-subtitle">
-      Showcasing our finest projects, crafted with <strong>creativity</strong>, 
-      <strong>precision</strong>, and <strong>innovation</strong>.
+  <section class="portfolio-section">
+  <h2 class="portfolio-heading">Portfolio</h2>
+  <p class="portfolio-subheading">
+    Showcasing our finest projects, crafted with <strong>creativity</strong>, <strong>precision</strong>, and <strong>innovation</strong>.
+  </p>
+    <div class="portfolio-layout">
+    
+    <!-- Image Slider -->
+    <div class="image-slider">
+<button class="portfolio-main-btn prev-project" onclick="prevProject()"><</button>
+      <img id="slider-image" src="assets/website 1.png" alt="Project Image">
+      <!-- Removed the next image button -->
+      <!-- Removed the next image button -->
+      <!-- Removed the next image button -->
+      <!-- Removed the next image button -->
+      <!-- Removed the next image button -->
+      <!-- <button class="slider-btn next" onclick="nextImage()">&#10095;</button> -->
+    </div>
+  
+  <div class="portfolio-cards">
+    <!-- Challenge Card -->
+    <div class="portfolio-card single-card">
+  <div class="card-content">
+    <h3>Chandrayaan-2 OHRC Image Enhancement</h3>
+    <p>
+      Harsh lunar lighting and Permanently Shadowed Regions made Chandrayaan-2’s OHRC images noisy, low-contrast,
+      and hard to analyze. We developed an advanced enhancement pipeline using preprocessing, contrast stretching,
+      histogram equalization, denoising, and adaptive illumination correction. This improved clarity by up to 152%
+      in shadowed areas, reduced noise, and enabled more accurate crater detection and geological mapping.
     </p>
   </div>
-    <div class="portfolio-card">
-      <div class="portfolio-header">
-        <img src="assets/portfolio-image.png" alt="Portfolio Project" class="portfolio-image">
-        <div class="portfolio-info">
-          <h2>Enhancement of OHRC images</h2>
-          <p class="subtitle">Retail Innovations Inc.</p>
-        </div>
-      </div>
+</div>
 
-      <div class="portfolio-content">
-        <div class="portfolio-columns">
-          <div class="column">
-            <h3>The Challenge</h3>
-            <p>Brief description of the client's challenge...</p>
-          </div>
-          <div class="column">
-            <h3>Our Solution</h3>
-            <p>Brief description of the solution you implemented...</p>
-          </div>
-          <div class="column">
-            <h3>Results</h3>
-            <p><strong>+152%</strong> engagement increase</p>
-          </div>
-        </div>
+  </div>
+  </div>
 
-      
-
-        <!-- Tools & Technologies -->
-        <div class="tools-section">
-          <h3>Tools and Technologies</h3>
-          <div class="tools-icons">
-            <img src="assets/icon1.png" alt="Tool 1">
-            <img src="assets/icon2.png" alt="Tool 2">
-            <img src="assets/icon3.png" alt="Tool 3">
-            <img src="assets/icon4.png" alt="Tool 4">
-            <img src="assets/icon5.png" alt="Tool 5">
-          </div>
-        </div>
-
-        <div class="portfolio-footer">
-          <button class="btn-primary">Explore More Projects</button>
-        </div>
-      </div>
+  <!-- Tools & Technologies moved outside cards -->
+  <div class="tools-section">
+    <h3>Tools and Technologies</h3>
+    <div class="tools-icons">
+      <img src="assets/icon1.png" alt="Tool 1">
+      <img src="assets/icon2.png" alt="Tool 2">
+      <img src="assets/icon3.png" alt="Tool 3">
+      <img src="assets/icon4.png" alt="Tool 4">
+      <img src="assets/icon5.png" alt="Tool 5">
     </div>
-  </section>
+  </div>
+<button class="portfolio-main-btn next-project" onclick="nextProject()">></button>
+</section>
 
   <!-- Terms & Conditions -->
   <section id="terms" class="terms and conditions">

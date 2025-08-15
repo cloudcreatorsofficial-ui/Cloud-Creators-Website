@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>CloudCreators</title>
+  <title>Cloud Creators</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -14,6 +14,37 @@
 <body>
   <app-root></app-root>
   <!-- Other HTML content -->
+   ...
+<!-- Your HTML above -->
+<script>
+  const images = [
+    "assets/website 1.png",
+    "assets/website 2.png",
+    "assets/website 3.png",
+    "assets/website 4.png",
+  ];
+
+  let currentProject = 0;
+const portfolioSection = document.querySelector(".portfolio-section");
+const projects = portfolioSection.querySelectorAll(".portfolio-content");
+
+function showProject(index) {
+  projects.forEach((proj, i) => {
+    proj.classList.toggle("active", i === index);
+  });
+}
+
+function prevProject() {
+  currentProject = (currentProject - 1 + projects.length) % projects.length;
+  showProject(currentProject);
+}
+
+function nextProject() {
+  currentProject = (currentProject + 1) % projects.length;
+  showProject(currentProject);
+}
+</script>
+
 
 <!-- Animation Script -->
 <script>
