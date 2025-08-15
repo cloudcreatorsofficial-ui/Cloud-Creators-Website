@@ -35,8 +35,14 @@ body {
   height: 90vh; /* Slightly reduced height for the cloud background */
   object-fit: contain; /* Changed to 'contain' to prevent cropping */
   z-index: -1;
-}
+  animation: cloud-float 4s ease-in-out infinite;
 
+}
+@keyframes cloud-float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
 .hero-text {
   text-align: center;
   color: white;
@@ -74,13 +80,15 @@ body {
 
 /* Service cards row */
 .services-list {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 items in the first row */
   gap: 20px;
-  flex-wrap: wrap; /* Wrap on smaller screens */
-  justify-content: center;
 }
-
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
 /* Make each card a square */
 .service-card {
   width: 220px;
@@ -191,7 +199,23 @@ body {
   line-height: 1.3;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+@media (max-width: 1024px) {
+  .services-list {
+    grid-template-columns: repeat(2, 1fr); /* 2 items in the row for medium screens */
+  }
+}
 
+@media (max-width: 600px) {
+  .services-list {
+    grid-template-columns: 1fr; /* 1 item in the row for small screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .services-container {
+    grid-template-columns: 1fr;
+  }
+}
 /* === About Section === */
 .about-section {
   padding: 80px 20px;
@@ -200,19 +224,80 @@ body {
 }
 
 .about-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Row for Images */
+.about-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 50px;
   max-width: 1200px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  padding: 40px 20px;
+}
+
+.about-left {
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-.about-image img {
+.main-about-img {
+  max-width: 650px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.circle-image-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 30px;
+}
+
+.circle-block {
+  text-align: center;
+}
+
+.circle-image {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.circle-image img {
   width: 100%;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  object-fit: cover;
+}
+
+.circle-name {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+}
+
+.about-right h2 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.about-right p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
 }
 
 .about-content h2 {
@@ -227,6 +312,9 @@ body {
   line-height: 1.8;
   margin-bottom: 20px;
   color: #555;
+}
+.about-content {
+  margin-top: -50px; /* adjust value until text is slightly higher */
 }
 
 .highlight {
@@ -395,52 +483,33 @@ body {
 /* === Contact Section === */
 .contact-section {
   padding: 80px 20px;
-  background-color: transparent /* You can adjust this to a different light background if needed */
+  background-color: transparent;
 }
 
-.contact-container {
-  display: flex;
-  align-items: center; /* Changed from flex-start to center for better vertical alignment */
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  padding: 40px 20px;
-}
-
-.contact-image {
-  flex: 0 1 300px; /* Adjusted flex property to better control the width */
-  text-align: center;
-}
-
-.contact-image img {
-  width: 100%; /* Make the image responsive within its container */
-  height: auto;
-  border-radius: 8px;
-  box-shadow: none;
-  background: transparent; /* Removed background to avoid any color overlay */
-}
-
-/* Contact Form Styles */
 .contact-card {
   background: #ffffff;
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  margin: 0 auto;
 }
+
+/* Subtitle styling */
 .contact-subtitle {
-  font-family: 'Georgia', serif; /* Elegant serif font */
-  font-size: 1.2rem; /* Slightly larger */
+  font-family: 'Georgia', serif;
+  font-size: 1.2rem;
   font-style: italic;
-  color: black; /* Accent color */
+  color: black;
   text-align: center;
-  margin-bottom: 1.5rem; /* Space before first form row */
+  margin-bottom: 1.5rem;
   letter-spacing: 0.5px;
-  opacity: 0; /* Start hidden */
-  transform: translateY(10px); /* Slight slide-up effect */
+  opacity: 0;
+  transform: translateY(10px);
   animation: fadeSlideIn 1s ease forwards;
 }
 
-/* Animation keyframes */
+/* Animation */
 @keyframes fadeSlideIn {
   to {
     opacity: 1;
@@ -448,10 +517,9 @@ body {
   }
 }
 
-
-/* Contact form aesthetic font */
+/* Contact Form */
 .contact-form {
-  font-family: 'Poppins', sans-serif; /* Modern clean font */
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   color: #2c3e50;
 }
@@ -460,40 +528,70 @@ body {
 .contact-form .form-row {
   display: flex;
   gap: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
-
+.contact-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+/* Form groups */
 .contact-form .form-group {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
+/* Image on the left */
+.contact-image {
+  flex: 0 0 400px; /* Fixed width for image */
+}
 
-.contact-form .form-field {
-  padding: 10px;
+.contact-image img {
+  width: 80%;
+  height: auto;
+  border-radius: 12px;
+}
+/* Form fields (input, textarea, select) */
+.contact-form .form-field,
+.contact-form select,
+.contact-form textarea {
+  padding: 12px 18px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 30px; /* Pill shape */
   font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+  background-color: #fff;
 }
 
-/* Date picker icon */
-.date-picker-wrapper {
-  position: relative;
+/* Focus effect */
+.contact-form .form-field:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: #7a42f4;
 }
 
-.calendar-icon {
-  cursor: pointer;
-  margin-left: 5px;
-  font-size: 20px;
-  vertical-align: middle;
-}
-
+/* Textarea */
 #requirementDescription {
-  height: 100px; /* Makes it taller */
-  resize: vertical; /* Allow user to resize if they want */
+  height: 80px;
+  resize: none;
 }
 
-/* Center submit button */
+/* Select dropdown arrow */
+.contact-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D'14'%20height%3D'10'%20viewBox%3D'0%200%2014%2010'%20xmlns%3D'http://www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M1%202L7%208L13%202'%20stroke%3D'%237a42f4'%20stroke-width%3D'2'%20fill%3D'none'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'/%3E%3C/svg%3E") no-repeat right 15px center;
+  background-size: 12px;
+}
+
+/* Submit Button */
 .submit-row {
   text-align: center;
 }
@@ -501,17 +599,17 @@ body {
 .btn-submit {
   background-color: #7a42f4;
   color: #fff;
-  padding: 10px 25px;
+  padding: 12px 40px;
   border: none;
-  border-radius: 8px;
+  border-radius: 30px;
   font-weight: bold;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 .btn-submit:hover {
   background-color: #5c32c0;
 }
-
 
 
 /* === Responsive Design === */
@@ -565,4 +663,24 @@ body {
 /* Gap between requirement dropdown and description textarea */
 #requirement {
   margin-bottom: 12px; /* Adjust as needed */
+}
+/* Base animation setup */
+.section {
+  opacity: 0;
+  transition: all 0.8s ease-out;
+}
+
+.section.show {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+/* Slide from left */
+.from-left {
+  transform: translateX(-50px);
+}
+
+/* Slide from right */
+.from-right {
+  transform: translateX(50px);
 }

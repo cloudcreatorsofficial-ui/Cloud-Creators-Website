@@ -20,15 +20,15 @@ export class NavbarComponent {
 
   private updateActiveSection() {
     const sections = ['home', 'services', 'about', 'portfolio', 'terms', 'contact'];
-    const scrollPosition = window.scrollY + 100; // Navbar offset
+    const scrollPosition = window.scrollY + 150; // Navbar offset
 
-    for (const section of sections) {
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = sections[i];
       const element = this.document.getElementById(section);
       if (element) {
         const offsetTop = element.offsetTop;
-        const offsetBottom = offsetTop + element.offsetHeight;
-
-        if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+        
+        if (scrollPosition >= offsetTop) {
           this.activeSection = section;
           break;
         }
@@ -42,6 +42,10 @@ export class NavbarComponent {
 
   scrollToSection(event: Event, sectionId: string) {
     event.preventDefault();
+    
+    // Immediately set the active section when clicked
+    this.activeSection = sectionId;
+    
     const section = this.document.getElementById(sectionId);
     if (section) {
       const navbarHeight = 80; // Adjust to your navbar height
