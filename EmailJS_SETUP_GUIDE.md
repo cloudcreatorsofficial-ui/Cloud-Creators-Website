@@ -1,21 +1,43 @@
-# Step-by-Step EmailJS Setup Guide
+# EmailJS Setup Guide for Cloud Creators Website
 
-## Step 1: Create EmailJS Account
-1. Go to https://www.emailjs.com/
-2. Click "Sign Up" and create a free account
-3. Verify your email address
+## Overview
+Your contact form is configured to send two emails:
+1. **Business Email**: Sent to `cloud.creators.official@gmail.com` with form details
+2. **User Confirmation Email**: Sent to the user's email address as confirmation
 
-## Step 2: Add Gmail Service
-1. In your EmailJS dashboard, click "Email Services" in the left sidebar
-2. Click "Add New Service"
-3. Select "Gmail" from the list
-4. Click "Connect Account"
-5. Sign in with your `cloud.creators.official@gmail.com` account
-6. Allow EmailJS to access your Gmail
-7. Your Service ID will be generated (usually looks like: `service_xxxxxxx`)
-8. **COPY THIS SERVICE ID** - you'll need it in Step 4
+## Current Configuration Status
+✅ EmailJS Service: `service_tgitmhe` (Already configured)
+✅ Business Template: `template_zqf4p0n` (Already configured)
+❌ User Confirmation Template: `template_user_confirmation` (NEEDS TO BE CREATED)
 
-## Step 3: Create Email Template
+## Step 1: Create User Confirmation Template
+1. Login to your EmailJS dashboard at https://dashboard.emailjs.com/
+2. Click "Email Templates" in the left sidebar
+3. Click "Create New Template"
+4. Set **Template ID**: `template_user_confirmation`
+5. Set **Template Name**: "User Confirmation Email"
+
+### Template Configuration:
+**To Email**: `{{to_email}}`
+**From Name**: `Cloud Creators`
+**Subject**: `{{subject}}`
+
+### Email Content:
+```
+Hi {{to_name}},
+
+{{message}}
+
+Best regards,
+Cloud Creators Team
+
+---
+Cloud Creators - Innovating Your Digital Future
+Website: https://cloudcreators.com
+Email: cloud.creators.official@gmail.com
+```
+
+## Step 2: Verify Existing Business Email Template
 1. Click "Email Templates" in the left sidebar
 2. Click "Create New Template"
 3. Set the template name to: `Contact Form Submission`

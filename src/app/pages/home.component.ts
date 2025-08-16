@@ -336,20 +336,44 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.isSubmitting = true;
 
     try {
-      // Initialize EmailJS (you'll need to replace YOUR_PUBLIC_KEY)
+      // Initialize EmailJS
       emailjs.init('W72yK8WU4E3hJee4c');
       
-      // Send email using EmailJS (you'll need to replace the service and template IDs)
-      const result = await emailjs.send(
-        'service_tgitmhe',    // Replace with your Service ID from EmailJS
-        'template_zqf4p0n',   // Replace with your Template ID from EmailJS
+      // Send email to business (Cloud Creators)
+      const businessResult = await emailjs.send(
+        'service_tgitmhe',    // Your Service ID from EmailJS
+        'template_zqf4p0n',   // Your Template ID for business emails
         templateParams
       );
 
-      console.log('Email sent successfully:', result);
+      console.log('Business email sent successfully:', businessResult);
+      
+      // Send confirmation email to the user
+      const userTemplateParams = {
+        to_email: email,
+        to_name: name,
+        requirement: requirement,
+        subject: 'Thank you for contacting Cloud Creators',
+        message: `Hi ${name},
+
+Thank you for reaching us out. Our team will be contacting you soon.
+
+Good day!
+
+Regards,
+Cloud Creators`
+      };
+
+      const userResult = await emailjs.send(
+        'service_tgitmhe',    // Same Service ID
+        'template_oi8pb5p', // You'll need to create this template for user confirmations
+        userTemplateParams
+      );
+
+      console.log('User confirmation email sent successfully:', userResult);
       
       // Show success message
-      this.showMessage('Message sent successfully! We will get back to you soon.', 'success');
+      this.showMessage('Message sent successfully! We will get back to you soon. A confirmation email has been sent to your email address.', 'success');
       
       // Reset form
       form.reset();
