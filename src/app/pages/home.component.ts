@@ -41,9 +41,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
       // Start auto-scrolling portfolio images
       this.startAutoScroll();
-
-      // Initialize Calendly widget
-      this.initializeCalendly();
     }
   }
 
