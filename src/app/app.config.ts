@@ -1,14 +1,9 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { HomeComponent } from './pages/home.component';
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter([
-      {
-        path: '',
-        component: HomeComponent,
-      }
-    ])
+    provideRouter(routes)
   ]
 };
