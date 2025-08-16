@@ -203,121 +203,62 @@
   <section id="contact" class="contact-section">
     <h2 class="contact-title" style="text-align: center">Contact Us</h2>
     <div class="contact-container contact-flex">
-      <!-- Left Image -->
-      <div class="contact-image">
-        <img src="assets/contact-image.png" alt="Contact Left Image" />
+      <!-- Left Side: Team Photos -->
+      <div class="contact-team">
+        <div class="team-intro">
+          <h3>Meet Our Heads</h3>
+          <p>Ready to discuss your project with our experts</p>
+        </div>
+        <div class="team-photos">
+          <div class="team-member">
+            <div class="member-photo">
+              <img src="assets/team-member-1.png" alt="Team Member 1" style="width: 100%; height: 100%; object-fit: cover; border-radius: 60%;" />
+            </div>
+            <div class="member-info">
+              <h4>Radhi TVJ</h4>
+              <p>Lead Developer</p>
+            </div>
+          </div>
+          <div class="team-member">
+            <div class="member-photo">
+              <img src="assets/team-member-2.jpg" alt="Team Member 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" />
+            </div>
+            <div class="member-info">
+              <h4>Bhavya Singu</h4>
+              <p>Lead Project Manager</p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-details">
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>cloud.creators.official&#64;gmail.com</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+91 9550546410</span>
+            <i class="fas fa-phone"></i>
+            <span>+91 9505325359</span>
+          </div>
+
+          
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Available Worldwide</span>
+          </div>
+        </div>
       </div>
 
-      <!-- Contact Form -->
-      <div class="contact-card">
-        <p class="contact-subtitle">Quality service, every step of the way.</p>
-        <form class="contact-form" (ngSubmit)="sendEmail($event)">
-          <!-- Row 1: Name & Email -->
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name" class="form-label"><strong>Name</strong></label>
-              <input
-                type="text"
-                id="name"
-                placeholder="Enter your name"
-                name="name"
-                class="form-field"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="email" class="form-label"
-                ><strong>Email</strong></label
-              >
-              <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                name="email"
-                class="form-field"
-                required
-              />
-            </div>
-          </div>
-
-          <!-- Row 2: Requirement & Description -->
-          <div class="form-row">
-            <div class="form-group">
-              <label for="requirement" class="form-label"
-                ><strong>Select your requirement</strong></label
-              >
-              <select
-                id="requirement"
-                name="requirement"
-                class="form-field"
-                required
-              >
-                <option value="" selected>Select one</option>
-                <option value="website">Website</option>
-                <option value="ai-ml-model">AI/ML Model</option>
-                <option value="app">App</option>
-                <option value="resume">Resume</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="requirementDescription" class="form-label"
-                ><strong>Description</strong></label
-              >
-              <textarea
-                id="requirementDescription"
-                placeholder="Describe your requirement..."
-                name="requirementDescription"
-                class="form-field"
-                required
-              ></textarea>
-            </div>
-            <div class="form-group">
-              <label for="contactNumber"><strong>Contact Number</strong></label>
-              <input
-                type="tel"
-                id="contactNumber"
-                placeholder="Enter your contact number"
-                name="contactNumber"
-                class="form-field"
-                required
-              />
-            </div>
-          </div>
-
-          <!-- Row 3: Schedule a Meeting -->
-          <div class="form-row date-row">
-            <div
-              class="form-group date-picker-wrapper"
-              style="position: relative; flex: 1"
-            >
-              <label for="schedule" class="form-label"
-                ><strong>Schedule a meeting</strong></label
-              >
-              <input
-                type="date"
-                id="schedule"
-                name="schedule"
-                class="form-field date-picker"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="time"><strong>Time</strong></label>
-              <select id="time" name="time" class="form-field" required>
-                <option value="">Select time</option>
-                <option value="05:00">05:00 PM</option>
-                <option value="16:00">6:00 PM</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Submit Button -->
-          <div class="submit-row">
-            <button type="submit" class="btn-submit" [disabled]="isSubmitting">
-              {{ isSubmitting ? 'Sending...' : 'Submit' }}
-            </button>
-          </div>
-        </form>
+      <!-- Right Side: Calendly Widget -->
+      <div class="contact-calendar">
+        <!-- <p class="contact-subtitle">Schedule a meeting with us directly</p> -->
+        <!-- Calendly iframe direct embed -->
+        <iframe src="https://calendly.com/cloud-creators-official" 
+                width="100%" 
+                height="550" 
+                frameborder="0"
+                style="border-radius: 12px;box-shadow: 0 8px 24px rgba(0,0,0,0.12);min-width:350px;">
+        </iframe>
       </div>
     </div>
   </section>

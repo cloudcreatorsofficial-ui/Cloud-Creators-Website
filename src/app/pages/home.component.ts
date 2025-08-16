@@ -41,6 +41,9 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
       // Start auto-scrolling portfolio images
       this.startAutoScroll();
+
+      // Initialize Calendly widget
+      this.initializeCalendly();
     }
   }
 
@@ -393,5 +396,27 @@ Cloud Creators`
         }
       }, 300);
     }, 5000);
+  }
+
+  // Initialize Calendly widget
+  private initializeCalendly() {
+    // Wait for Calendly script to load
+    const checkCalendly = () => {
+      if ((window as any).Calendly) {
+        // Initialize Calendly inline widget
+        (window as any).Calendly.initInlineWidget({
+          url: 'https://calendly.com/cloud-creators-official',
+          parentElement: document.querySelector('.calendly-inline-widget'),
+          prefill: {},
+          utm: {}
+        });
+      } else {
+        // Retry after 100ms if Calendly script hasn't loaded yet
+        setTimeout(checkCalendly, 100);
+      }
+    };
+    
+    // Start checking for Calendly
+    setTimeout(checkCalendly, 500);
   }
 }
