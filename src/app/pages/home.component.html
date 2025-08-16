@@ -122,7 +122,7 @@
     <div class="portfolio-layout">
       <!-- Image Slider -->
       <div class="image-slider">
-        <img id="slider-image" src="assets/website 1.png" alt="Project Image" />
+        <img id="slider-image" src="assets/website%201.png" alt="Project Image" />
       </div>
 
       <div class="portfolio-cards">
@@ -147,21 +147,23 @@
     <div class="portfolio-layout">
       <!-- Image Slider -->
       <div class="image-slider">
-        <img id="slider-image" src="assets/website 1.png" alt="Project Image" />
+        <img id="slider-image" src="assets/website-2-1.png" alt="Project Image" />
       </div>
       <div class="portfolio-cards">
         <!-- Challenge Card -->
         <div class="portfolio-card single-card">
           <div class="card-content">
-            <h3>Chandrayaan-2 OHRC Image Enhancement</h3>
+            <h3>Resort Booking</h3>
             <p>
-              Harsh lunar lighting and Permanently Shadowed Regions made
-              Chandrayaan-2’s OHRC images noisy, low-contrast, and hard to
-              analyze. We developed an advanced enhancement pipeline using
-              preprocessing, contrast stretching, histogram equalization,
-              denoising, and adaptive illumination correction. This improved
-              clarity by up to 152% in shadowed areas, reduced noise, and
-              enabled more accurate crater detection and geological mapping.
+              Traditional rental platforms inspired the need for a user-centric
+              solution. I built an Airbnb Clone that enables seamless property
+              browsing, booking, and management with secure authentication,
+              dynamic search and filtering, and real-time availability tracking.
+              The system integrates responsive UI design, scalable backend APIs,
+              and database-driven storage for users, listings, and reservations.
+              This streamlined the rental experience by providing hosts with
+              easy property management tools and guests with fast, reliable
+              booking functionality.
             </p>
           </div>
         </div>
@@ -177,15 +179,19 @@
         <!-- Challenge Card -->
         <div class="portfolio-card single-card">
           <div class="card-content">
-            <h3>Chandrayaan-2 OHRC Image Enhancement</h3>
+            <h3>Android Chat App</h3>
             <p>
-              Harsh lunar lighting and Permanently Shadowed Regions made
-              Chandrayaan-2’s OHRC images noisy, low-contrast, and hard to
-              analyze. We developed an advanced enhancement pipeline using
-              preprocessing, contrast stretching, histogram equalization,
-              denoising, and adaptive illumination correction. This improved
-              clarity by up to 152% in shadowed areas, reduced noise, and
-              enabled more accurate crater detection and geological mapping.
+              Growing concerns over data security and digital surveillance
+              inspired the development of a next-generation Privacy Chat
+              Application. I designed it with end-to-end encryption, anonymous
+              identifiers, disappearing messages, and screenshot detection to
+              ensure maximum confidentiality. Unlike conventional messengers, no
+              chats are stored on the cloud—messages remain only on user devices
+              with customizable auto-deletion timers. The app also integrates
+              anime-style video calls using real-time style transfer, preserving
+              both identity and privacy. This created a secure, user-first
+              communication platform that blends strong encryption with
+              innovative anonymity features.
             </p>
           </div>
         </div>
@@ -203,9 +209,9 @@
       <img src="assets/icon5.png" alt="Tool 5">
     </div>
   </div> -->
-    <button class="portfolio-main-btn next-project" onclick="nextProject()">
+    <!-- <button class="portfolio-main-btn next-project" onclick="nextProject()"> -->
       >
-    </button>
+    <!-- </button> -->
   </section>
 
   <!-- Contact Section -->
@@ -220,7 +226,7 @@
       <!-- Contact Form -->
       <div class="contact-card">
         <p class="contact-subtitle">Quality service, every step of the way.</p>
-        <form class="contact-form">
+        <form class="contact-form" (ngSubmit)="sendEmail($event)">
           <!-- Row 1: Name & Email -->
           <div class="form-row">
             <div class="form-group">
@@ -322,7 +328,9 @@
 
           <!-- Submit Button -->
           <div class="submit-row">
-            <button type="submit" class="btn-submit">Submit</button>
+            <button type="submit" class="btn-submit" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'Sending...' : 'Submit' }}
+            </button>
           </div>
         </form>
       </div>

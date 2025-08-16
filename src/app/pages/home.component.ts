@@ -1,18 +1,21 @@
 import { Component, HostListener, AfterViewInit, PLATFORM_ID, Inject, OnDestroy } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Chart } from 'chart.js/auto';
+import emailjs from '@emailjs/browser';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, FormsModule, NavbarComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
   sectionIds = ['home', 'services', 'about', 'portfolio', 'terms', 'contact'];
   private isBrowser: boolean;
+  isSubmitting = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     this.isBrowser = isPlatformBrowser(this.platformId);
@@ -260,5 +263,143 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     if (this.autoScrollInterval) {
       clearInterval(this.autoScrollInterval);
     }
+  }
+
+  // Email functionality
+  async sendEmail(event: Event) {
+    event.preventDefault();
+    
+    if (this.isSubmitting) return; // Prevent double submission
+    
+    const form = event.target as HTMLFormElement;
+    const formData = new FormData(form);
+    
+    // Validate required fields
+    const requiredFields = ['name', 'email', 'requirement', 'requirementDescription', 'contactNumber', 'schedule', 'time'];
+    for (const field of requiredFields) {
+      if (!formData.get(field)) {
+        this.showMessage(`Please fill in the ${field.replace(/([A-Z])/g, ' $1').toLowerCase()} field.`, 'error');
+        return;
+      }
+    }
+    
+    // Extract form values
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const requirement = formData.get('requirement') as string;
+    const description = formData.get('requirementDescription') as string;
+    const contactNumber = formData.get('contactNumber') as string;
+    const schedule = formData.get('schedule') as string;
+    const time = formData.get('time') as string;
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      this.showMessage('Please enter a valid email address.', 'error');
+      return;
+    }
+    
+    // Prepare email template parameters
+    const templateParams = {
+      from_name: name,
+      from_email: email,
+      to_email: 'cloud.creators.official@gmail.com',
+      subject: `New Contact Form Submission - ${requirement}`,
+      message: `
+        New contact form submission received:
+        
+        📋 CONTACT DETAILS:
+        ▪️ Name: ${name}
+        ▪️ Email: ${email}
+        ▪️ Contact Number: ${contactNumber}
+        
+        🔧 PROJECT DETAILS:
+        ▪️ Requirement: ${requirement}
+        ▪️ Description: ${description}
+        
+        📅 MEETING SCHEDULE:
+        ▪️ Date: ${schedule}
+        ▪️ Time: ${time}
+        
+        ---
+        This message was sent from the Cloud Creators website contact form.
+      `,
+      name: name,
+      email: email,
+      requirement: requirement,
+      description: description,
+      contact_number: contactNumber,
+      schedule_date: schedule,
+      schedule_time: time
+    };
+
+    this.isSubmitting = true;
+
+    try {
+      // Initialize EmailJS (you'll need to replace YOUR_PUBLIC_KEY)
+      emailjs.init('W72yK8WU4E3hJee4c');
+      
+      // Send email using EmailJS (you'll need to replace the service and template IDs)
+      const result = await emailjs.send(
+        'service_tgitmhe',    // Replace with your Service ID from EmailJS
+        'template_zqf4p0n',   // Replace with your Template ID from EmailJS
+        templateParams
+      );
+
+      console.log('Email sent successfully:', result);
+      
+      // Show success message
+      this.showMessage('Message sent successfully! We will get back to you soon.', 'success');
+      
+      // Reset form
+      form.reset();
+
+    } catch (error) {
+      console.error('Email send failed:', error);
+      this.showMessage('Failed to send message. Please try again later.', 'error');
+    } finally {
+      this.isSubmitting = false;
+    }
+  }
+
+  private showMessage(message: string, type: 'success' | 'error') {
+    // Create message element
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message-popup ${type}`;
+    messageDiv.textContent = message;
+    messageDiv.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      z-index: 1000;
+      max-width: 350px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      font-size: 14px;
+      line-height: 1.4;
+      background-color: ${type === 'success' ? '#4CAF50' : '#f44336'};
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    `;
+
+    document.body.appendChild(messageDiv);
+
+    // Animate in
+    setTimeout(() => {
+      messageDiv.style.transform = 'translateX(0)';
+    }, 100);
+
+    // Remove after 5 seconds
+    setTimeout(() => {
+      messageDiv.style.transform = 'translateX(100%)';
+      setTimeout(() => {
+        if (document.body.contains(messageDiv)) {
+          document.body.removeChild(messageDiv);
+        }
+      }, 300);
+    }, 5000);
   }
 }
