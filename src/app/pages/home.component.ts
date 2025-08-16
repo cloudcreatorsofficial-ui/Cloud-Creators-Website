@@ -365,7 +365,7 @@ Cloud Creators`
       };
 
       const userResult = await emailjs.send(
-        'service_tgitmhe',    // Same Service ID
+        'service_d0fgrqh',    // Same Service ID
         'template_oi8pb5p', // You'll need to create this template for user confirmations
         userTemplateParams
       );
