@@ -17,6 +17,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   sectionIds = ['home', 'services', 'about', 'portfolio', 'terms', 'contact'];
   private isBrowser: boolean;
   isSubmitting = false;
+  private portfolioIntervals: any[] = [];
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) {
     this.isBrowser = isPlatformBrowser(this.platformId);
@@ -187,61 +188,165 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     if (!this.isBrowser) return;
 
     setTimeout(() => {
-      const images = [
-        'assets/website%201.png', 
-        'assets/website%202.png', 
-        'assets/website%203.png', 
-        'assets/website%204.png'
+      // Define different image sets for each slider
+      const sliderImageSets = [
+        // First slider (Chandrayaan-2) - your specified images
+        [
+          'assets/website 1.png',
+          'assets/website 2.png',
+          'assets/website 3.png',
+          'assets/website 4.png'
+        ],
+        // Second slider (Resort Booking) - your specified images
+        [
+          'assets/website-2-1.png',
+          'assets/website-2-2.png',
+          'assets/website-2-3.png',
+          'assets/website-2-4.png',
+          'assets/website-2-5.png'
+        ],
+        // Third slider (Chat App) - your specified images
+        [
+          'assets/app 1.png',
+          'assets/app 2.png',
+          'assets/app 3.png',
+          'assets/app 4.png',
+          'assets/app 5.png',
+          'assets/app 6.png'
+        ],
+        // Fourth slider (DRBK Building Systems) - your specified images
+        [
+          'assets/DRBK/DRBK-1.jpeg',
+          'assets/DRBK/DRBK-2.jpeg',
+          'assets/DRBK/DRBK-3.jpeg',
+          'assets/DRBK/DRBK-4.jpeg',
+          'assets/DRBK/DRBK-5.jpeg',
+          'assets/DRBK/DRBK-6.jpeg',
+          'assets/DRBK/DRBK-7.jpeg',
+          'assets/DRBK/DRBK-8.jpeg',
+          'assets/DRBK/DRBK-9.jpeg',
+          'assets/DRBK/DRBK-10.jpeg',
+          'assets/DRBK/DRBK-11.jpeg',
+          'assets/DRBK/DRBK-12.jpeg'
+        ]
       ];
-      let currentIndex = 0;
-      const sliderImage = document.getElementById('slider-image') as HTMLImageElement;
       
-      if (!sliderImage) {
-        console.error('Slider image element not found!');
-        return;
-      }
+      // Get all image sliders in portfolio sections
+      const imageSliders = document.querySelectorAll('.portfolio-section .image-slider img') as NodeListOf<HTMLImageElement>;
+      
+      imageSliders.forEach((sliderImage, sliderIndex) => {
+        if (!sliderImage) return;
 
-      sliderImage.src = images[currentIndex];
-      sliderImage.style.transition = 'opacity 0.6s ease-in-out, transform 0.6s ease-in-out';
-
-      this.autoScrollInterval = setInterval(() => {
-        currentIndex = (currentIndex + 1) % images.length;
-        sliderImage.style.opacity = '0';
-        sliderImage.style.transform = 'scale(1.05)';
+        // Get the appropriate image set for this slider
+        const currentImageSet = sliderImageSets[sliderIndex] || sliderImageSets[0];
+        let currentIndex = 0;
         
+        // Set initial image (already set in HTML, but ensure consistency)
+        if (sliderIndex === 0) {
+          sliderImage.src = currentImageSet[0]; // Start with website 1.png for first slider
+        } else if (sliderIndex === 1) {
+          sliderImage.src = currentImageSet[0]; // Start with website-2-1.png for second slider
+        } else if (sliderIndex === 2) {
+          sliderImage.src = currentImageSet[0]; // Start with app 1.png for third slider
+        } else if (sliderIndex === 3) {
+          sliderImage.src = currentImageSet[0]; // Start with DRBK-1.jpeg for fourth slider
+        }
+        
+        // Define different intervals for each slider (in milliseconds)
+        const sliderIntervals = [1500, 1500, 2000, 1500]; // 1.5s, 1.5s, 2s, 1.5s
+        const currentInterval = sliderIntervals[sliderIndex] || 1500;
+        
+        // Enhanced pop animation styles
+        sliderImage.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        sliderImage.style.borderRadius = '12px';
+        sliderImage.style.boxShadow = '0 8px 32px rgba(0,0,0,0.15)';
+
+        // Start animation with staggered timing for each slider
         setTimeout(() => {
-          sliderImage.src = images[currentIndex];
-          sliderImage.style.opacity = '1';
-          sliderImage.style.transform = 'scale(1)';
-        }, 300);
-      }, 2000);
-
-      const sliderContainer = document.querySelector('.image-slider');
-      if (sliderContainer) {
-        sliderContainer.addEventListener('mouseenter', () => {
-          clearInterval(this.autoScrollInterval);
-        });
-        
-        sliderContainer.addEventListener('mouseleave', () => {
-          this.autoScrollInterval = setInterval(() => {
-            currentIndex = (currentIndex + 1) % images.length;
-            sliderImage.style.opacity = '0';
-            sliderImage.style.transform = 'scale(1.05)';
+          const intervalId = setInterval(() => {
+            currentIndex = (currentIndex + 1) % currentImageSet.length;
+            
+            // Pop out animation (scale down and fade)
+            sliderImage.style.transform = 'scale(0.85)';
+            sliderImage.style.opacity = '0.6';
             
             setTimeout(() => {
-              sliderImage.src = images[currentIndex];
+              // Change image during the transition
+              sliderImage.src = currentImageSet[currentIndex];
+              
+              // Pop in animation (scale up and fade in)
+              sliderImage.style.transform = 'scale(1.1)';
               sliderImage.style.opacity = '1';
-              sliderImage.style.transform = 'scale(1)';
-            }, 300);
-          }, 2000);
-        });
-      }
+              
+              // Settle to normal size
+              setTimeout(() => {
+                sliderImage.style.transform = 'scale(1)';
+              }, 200);
+            }, 250);
+          }, currentInterval); // Use the specific interval for this slider
+
+          // Store interval for cleanup
+          this.portfolioIntervals.push(intervalId);
+
+          // Pause animation on hover
+          const sliderContainer = sliderImage.closest('.image-slider');
+          if (sliderContainer) {
+            let isPaused = false;
+            
+            sliderContainer.addEventListener('mouseenter', () => {
+              if (!isPaused) {
+                clearInterval(intervalId);
+                isPaused = true;
+                // Add hover effect
+                sliderImage.style.transform = 'scale(1.05)';
+                sliderImage.style.boxShadow = '0 12px 40px rgba(0,0,0,0.25)';
+              }
+            });
+            
+            sliderContainer.addEventListener('mouseleave', () => {
+              if (isPaused) {
+                // Resume animation
+                const newIntervalId = setInterval(() => {
+                  currentIndex = (currentIndex + 1) % currentImageSet.length;
+                  
+                  sliderImage.style.transform = 'scale(0.85)';
+                  sliderImage.style.opacity = '0.6';
+                  
+                  setTimeout(() => {
+                    sliderImage.src = currentImageSet[currentIndex];
+                    sliderImage.style.transform = 'scale(1.1)';
+                    sliderImage.style.opacity = '1';
+                    
+                    setTimeout(() => {
+                      sliderImage.style.transform = 'scale(1)';
+                      sliderImage.style.boxShadow = '0 8px 32px rgba(0,0,0,0.15)';
+                    }, 200);
+                  }, 250);
+                }, currentInterval); // Use the same specific interval for this slider
+                
+                // Update stored interval
+                const index = this.portfolioIntervals.indexOf(intervalId);
+                if (index > -1) {
+                  this.portfolioIntervals[index] = newIntervalId;
+                }
+                isPaused = false;
+              }
+            });
+          }
+        }, sliderIndex * 667); // Stagger start times by ~0.667 seconds
+      });
     }, 1000);
   }
 
   ngOnDestroy() {
-    if (this.autoScrollInterval) {
-      clearInterval(this.autoScrollInterval);
+    // Clear all portfolio intervals
+    if (this.portfolioIntervals && this.portfolioIntervals.length > 0) {
+      this.portfolioIntervals.forEach(interval => {
+        if (interval) {
+          clearInterval(interval);
+        }
+      });
+      this.portfolioIntervals = [];
     }
   }
 
