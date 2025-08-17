@@ -10,6 +10,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 })
 export class NavbarComponent {
   activeSection = 'home';
+  isMenuOpen = false;
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
@@ -46,6 +47,9 @@ export class NavbarComponent {
     // Immediately set the active section when clicked
     this.activeSection = sectionId;
     
+    // Close mobile menu when a link is clicked
+    this.isMenuOpen = false;
+    
     const section = this.document.getElementById(sectionId);
     if (section) {
       const navbarHeight = 80; // Adjust to your navbar height
@@ -56,5 +60,13 @@ export class NavbarComponent {
         behavior: 'smooth'
       });
     }
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeMenu() {
+    this.isMenuOpen = false;
   }
 }

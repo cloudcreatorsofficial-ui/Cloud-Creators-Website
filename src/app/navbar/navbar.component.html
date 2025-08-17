@@ -3,13 +3,33 @@
     <img src="assets/logo cloud creators.png" alt="Logo" class="logo-img" />
     <span class="logo-title">Cloud Creators</span>
   </div>
-  <nav class="nav-links">
+  
+  <!-- Desktop Navigation -->
+  <nav class="nav-links desktop-nav">
     <a href="" (click)="scrollToSection($event, 'home')" [class.active]="isActive('home')">Home</a>
     <a href="" (click)="scrollToSection($event, 'services')" [class.active]="isActive('services')">Services</a>
     <a href="" (click)="scrollToSection($event, 'about')" [class.active]="isActive('about')">About Us</a>
     <a href="" (click)="scrollToSection($event, 'portfolio')" [class.active]="isActive('portfolio')">Portfolio</a>
-    <!-- <a href="" (click)="scrollToSection($event, 'terms')" [class.active]="isActive('terms')">Terms & Conditions</a> -->
     <a href="" (click)="scrollToSection($event, 'contact')" [class.active]="isActive('contact')">Contact Us</a>
   </nav>
 
+  <!-- Mobile Hamburger Menu -->
+  <div class="mobile-menu">
+    <button class="hamburger" (click)="toggleMenu()" [class.active]="isMenuOpen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" [class.active]="isMenuOpen" (click)="closeMenu()">
+      <nav class="mobile-nav" (click)="$event.stopPropagation()">
+        <a href="" (click)="scrollToSection($event, 'home')" [class.active]="isActive('home')">Home</a>
+        <a href="" (click)="scrollToSection($event, 'services')" [class.active]="isActive('services')">Services</a>
+        <a href="" (click)="scrollToSection($event, 'about')" [class.active]="isActive('about')">About Us</a>
+        <a href="" (click)="scrollToSection($event, 'portfolio')" [class.active]="isActive('portfolio')">Portfolio</a>
+        <a href="" (click)="scrollToSection($event, 'contact')" [class.active]="isActive('contact')">Contact Us</a>
+      </nav>
+    </div>
+  </div>
 </header>
