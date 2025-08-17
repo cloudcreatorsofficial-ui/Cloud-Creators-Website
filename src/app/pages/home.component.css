@@ -907,3 +907,69 @@ body {
 .social-icons a:hover {
     color: #ffffff;
 }
+
+/* Light Blue Clean Footer */
+footer {
+  background: #e6f3ff; /* light blue background */
+  color: #333;
+  font-family: "Poppins", sans-serif;
+  padding: 12px 30px;
+  border-top: 2px solid #cce0ff;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+
+/* Copyright */
+footer .copyright {
+  font-weight: 500;
+  color: #004080; /* darker blue for emphasis */
+}
+
+/* Links */
+.footer-links a {
+  color: #0066cc;
+  text-decoration: none;
+  margin: 0 8px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #003366;
+  text-decoration: underline;
+}
+
+/* Social Icons */
+.social-icons a {
+  color: #0066cc;
+  margin: 0 6px;
+  font-size: 16px;
+  transition: color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.social-icons a:hover {
+  color: #003366;
+  transform: scale(1.2);
+}
+
+/* Responsive - collapse to center */
+@media (max-width: 600px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+}
+
+
+
+
+
