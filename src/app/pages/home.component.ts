@@ -11,7 +11,7 @@ import emailjs from '@emailjs/browser';
   standalone: true,
   imports: [CommonModule, FormsModule, NavbarComponent],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css', './image-optimization.css']
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
   sectionIds = ['home', 'services', 'about', 'portfolio', 'terms', 'contact'];
@@ -25,6 +25,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     if (this.isBrowser) {
+      this.preloadCriticalImages();
+      this.setupImageObserver();
       this.revealSections();
 
       // Chart.js graphs
@@ -43,6 +45,26 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       // Start auto-scrolling portfolio images
       this.startAutoScroll();
     }
+  }
+
+  // Preload critical images for better performance
+  private preloadCriticalImages() {
+    const criticalImages = [
+      'assets/cloud-graphic.png',
+      'assets/website-icon.png',
+      'assets/app-icon.png',
+      'assets/ai-icon.png',
+      'assets/resume-icon.png',
+      'assets/website 1.png',
+      'assets/website-2-1.png',
+      'assets/app 1.png',
+      'assets/DRBK/DRBK-1.jpeg'
+    ];
+
+    criticalImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
   }
 
   createCharts() {
@@ -526,5 +548,35 @@ Cloud Creators`
     
     // Start checking for Calendly
     setTimeout(checkCalendly, 500);
+  }
+
+  // Optimize image loading with intersection observer
+  private setupImageObserver() {
+    if (!this.isBrowser || typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+
+    const imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target as HTMLImageElement;
+          if (img.dataset['src']) {
+            img.src = img.dataset['src'];
+            img.removeAttribute('data-src');
+            img.classList.add('loaded');
+          }
+          imageObserver.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: '50px 0px',
+      threshold: 0.01
+    });
+
+    // Observe all lazy loaded images
+    setTimeout(() => {
+      const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+      lazyImages.forEach(img => {
+        img.classList.add('loaded'); // For images with native lazy loading
+      });
+    }, 100);
   }
 }
