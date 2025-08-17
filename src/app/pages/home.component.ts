@@ -1,4 +1,4 @@
-import { Component, HostListener, AfterViewInit, PLATFORM_ID, Inject, OnDestroy } from '@angular/core';
+import { Component, HostListener, AfterViewInit, PLATFORM_ID, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +13,7 @@ import emailjs from '@emailjs/browser';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css', './image-optimization.css']
 })
-export class HomeComponent implements AfterViewInit, OnDestroy {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   sectionIds = ['home', 'services', 'about', 'portfolio', 'terms', 'contact'];
   private isBrowser: boolean;
   isSubmitting = false;
@@ -21,6 +21,10 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) {
     this.isBrowser = isPlatformBrowser(this.platformId);
+  }
+
+  ngOnInit() {
+    // Initialize only browser-safe code here
   }
 
   ngAfterViewInit() {
@@ -113,7 +117,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    if (this.isBrowser) {
+    if (this.isBrowser && typeof window !== 'undefined') {
       this.revealSections();
       this.highlightNavLink();
     }
