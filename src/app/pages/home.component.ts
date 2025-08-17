@@ -46,7 +46,9 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   }
 
   createCharts() {
-    // Only create charts if the elements exist
+    if (!this.isBrowser) return;
+    
+    // Only create charts if the elements exist and we're in browser
     const pieChartElement = document.getElementById('myPieChart');
     const barChartElement = document.getElementById('myBarChart');
 
