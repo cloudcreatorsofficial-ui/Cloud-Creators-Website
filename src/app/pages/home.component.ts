@@ -136,6 +136,10 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.router.navigate(['/terms-and-conditions']);
   }
 
+  scrollToPrivacy() {
+    this.router.navigate(['/privacy-policy']);
+  }
+
   // Portfolio navigation functions
   prevProject() {
     console.log('Previous project clicked');

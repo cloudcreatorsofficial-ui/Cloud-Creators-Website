@@ -319,22 +319,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <footer>
     <div class="footer-container">
-        <div class="copyright">
+        <div class="copyright" style="display: flex; align-items: center;">
+            <img src="assets/logo cloud creators.png" alt="Cloud Creators Logo" style="height: 30px; margin-right: 10px;">
             Cloud Creators
         </div>
         <div class="footer-links">
             <ul>
-                <a href="privacy-policy.html">Privacy Policy</a> |
+                <a (click)="scrollToPrivacy()" style="cursor:pointer;">Privacy Policy</a> |
                   <a (click)="scrollToTerms()" style="cursor:pointer;">Terms and Conditions</a>
-                <!-- <a href="return-and-refund-policy.html">Return and refund policy</a> |
-                <a href="pricing.html">Pricing</a> -->
+                
             </ul>
         </div>
         <div class="social-icons">
-            <a href="#" aria-label="Facebook"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/cloudcreatorsofficial-ui" aria-label="GitHub"><i class="fab fa-github"></i></a>
             <!-- <a href="#" aria-label="Twitter"><i class="fab fa-envelope"></i></a> -->
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.linkedin.com/in/cloud-creators-cloud-creators-6b11a237b/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             <!-- <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a> -->
+             <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
         </div>
     </div>
 </footer>
