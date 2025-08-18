@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component'; // ✅ Import NavbarComponent
+import { inject } from '@vercel/analytics';
 
 @Component({
   selector: 'app-root',
@@ -14,4 +15,9 @@ import { NavbarComponent } from './navbar/navbar.component'; // ✅ Import Navba
     <router-outlet></router-outlet>
   `,
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  ngOnInit() {
+    // Initialize Vercel Analytics (fallback if not already initialized)
+    inject();
+  }
+}
