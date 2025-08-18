@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://cloudcreators.in/sitemap.xml
+
+# Important pages for crawling
+Allow: /#services
+Allow: /#about
+Allow: /#portfolio
+Allow: /#contact
+
+# Block unnecessary files
+Disallow: /assets/
+Allow: /assets/logo cloud creators.png
+Allow: /assets/*.jpg
+Allow: /assets/*.png
