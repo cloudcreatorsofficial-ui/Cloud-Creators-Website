@@ -6,13 +6,83 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
+  <!-- Favicon links for all platforms -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/web-app-manifest-512x512.png">
+  <link rel="manifest" href="/site.webmanifest">
+  
+  <!-- JSON-LD Schema Markup for Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Cloud Creators",
+    "url": "https://cloudcreators.in",
+    "logo": "https://cloudcreators.in/assets/logo cloud creators.png",
+    "image": "https://cloudcreators.in/assets/logo cloud creators.png",
+    "description": "Professional website creators and makers specializing in responsive web development, mobile apps, AI/ML solutions, and digital transformation services.",
+    "foundingDate": "2024",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Available Worldwide",
+      "addressCountry": "IN"
+    },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+91-9550546410",
+        "contactType": "customer service",
+        "email": "cloud.creators.official@gmail.com",
+        "availableLanguage": "English"
+      },
+      {
+        "@type": "ContactPoint", 
+        "telephone": "+91-9505325359",
+        "contactType": "customer service",
+        "email": "cloud.creators.official@gmail.com",
+        "availableLanguage": "English"
+      }
+    ],
+    "sameAs": [
+      "https://www.linkedin.com/in/cloud-creators-cloud-creators-6b11a237b/",
+      "https://www.instagram.com/cloud.creators.official/",
+      "https://github.com/cloudcreatorsofficial-ui"
+    ],
+    "service": [
+      {
+        "@type": "Service",
+        "name": "Website Development",
+        "description": "Professional website development services"
+      },
+      {
+        "@type": "Service", 
+        "name": "Mobile App Development",
+        "description": "Custom mobile application development for Android and iOS"
+      },
+      {
+        "@type": "Service",
+        "name": "AI/ML Solutions", 
+        "description": "Artificial Intelligence and Machine Learning solutions"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "50",
+      "bestRating": "5"
+    }
+  }
+  </script>
+  
   <!-- Preload critical image with highest priority -->
   <link rel="preload" as="image" href="assets/cloud-graphic.png" fetchpriority="high">
   
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="assets/logo cloud creators.png">
 
 </head>
 <body>
