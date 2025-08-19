@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-terms-and-conditions',
@@ -8,10 +9,12 @@ import { Router } from '@angular/router';
   styleUrls: []
 })
 export class TermsAndConditionsComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit() {
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
   }
 
   goHome() {

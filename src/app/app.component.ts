@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component'; // ✅ Import NavbarComponent
 import { inject } from '@vercel/analytics';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +17,12 @@ import { inject } from '@vercel/analytics';
   `,
 })
 export class AppComponent implements OnInit {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
   ngOnInit() {
-    // Initialize Vercel Analytics (fallback if not already initialized)
-    inject();
+    // Initialize Vercel Analytics only in browser environment
+    if (isPlatformBrowser(this.platformId)) {
+      inject();
+    }
   }
 }

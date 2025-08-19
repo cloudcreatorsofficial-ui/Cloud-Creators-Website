@@ -1,5 +1,5 @@
-import { Component, HostListener, Inject } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +12,7 @@ export class NavbarComponent {
   activeSection = 'home';
   isMenuOpen = false;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(@Inject(DOCUMENT) private document: Document, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
@@ -20,6 +20,8 @@ export class NavbarComponent {
   }
 
   private updateActiveSection() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    
     const sections = ['home', 'services', 'about', 'portfolio', 'terms', 'contact'];
     const scrollPosition = window.scrollY + 150; // Navbar offset
 
@@ -49,6 +51,8 @@ export class NavbarComponent {
     
     // Close mobile menu when a link is clicked
     this.isMenuOpen = false;
+    
+    if (!isPlatformBrowser(this.platformId)) return;
     
     const section = this.document.getElementById(sectionId);
     if (section) {
