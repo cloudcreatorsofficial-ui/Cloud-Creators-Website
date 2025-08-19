@@ -1,30 +1,30 @@
 {
-  "name": "Cloud Creators - Professional Web Development",
+  "name": "Cloud Creators - Website Development & Digital Solutions",
   "short_name": "Cloud Creators",
-  "description": "Professional website creators and makers specializing in responsive web development, mobile apps, and AI/ML solutions",
-  "start_url": "/",
-  "scope": "/",
+  "description": "Professional website creators specializing in responsive web development, mobile apps, AI/ML solutions, and digital transformation services.",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "maskable"
     },
     {
       "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "maskable"
     },
     {
-      "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
       "type": "image/png"
     }
   ],
-  "theme_color": "#7a4df0",
+  "theme_color": "#3b82f6",
   "background_color": "#ffffff",
   "display": "standalone",
-  "orientation": "portrait-primary"
+  "start_url": "/",
+  "scope": "/",
+  "orientation": "portrait"
 }
